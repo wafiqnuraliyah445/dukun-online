@@ -12,17 +12,12 @@ router.get('/home', async (req, res) => {
 
     try {
 
-        const bookings = await Booking.find();
-
-        res.render('home', {
-            bookings
-        });
+        res.render('home');
 
     } catch (err) {
 
         console.log(err);
-
-        res.send('Error ambil data booking');
+        res.send(err.message);
 
     }
 
