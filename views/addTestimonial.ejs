@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Tambah Testimoni</title>
+
+<style>
+
+body{
+    font-family:Poppins;
+    background:#111;
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    height:100vh;
+}
+
+form{
+    width:400px;
+
+    background:#1e1e1e;
+
+    padding:30px;
+
+    border-radius:20px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+
+    margin:10px 0;
+    padding:14px;
+
+    border:none;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    background:gold;
+    color:black;
+
+    font-weight:bold;
+
+    border-radius:10px;
+}
+
+</style>
+
+</head>
+<body>
+
+<form
+action="/testimonial/add"
+method="POST">
+
+<h1>🔮 Tambah Testimoni</h1>
+
+<input
+type="text"
+name="client_nama"
+placeholder="Nama Kamu"
+required>
+
+<select
+name="dukun_nama"
+required>
+
+<option value="">
+Pilih Dukun
+</option>
+
+<option>
+Mbah Coding
+</option>
+
+<option>
+Ki Debugging
+</option>
+
+<option>
+Nyi Stackoverflow
+</option>
+
+<option>
+Mbah Query
+</option>
+
+</select>
+
+<textarea
+name="review"
+placeholder="Ceritakan pengalaman ritual..."
+required></textarea>
+
+<select
+name="rating"
+required>
+
+<option value="">
+Rating
+</option>
+
+<option value="5">
+⭐⭐⭐⭐⭐
+</option>
+
+<option value="4">
+⭐⭐⭐⭐
+</option>
+
+<option value="3">
+⭐⭐⭐
+</option>
+
+</select>
+
+<button type="submit">
+Kirim Testimoni
+</button>
+
+</form>
+
+</body>
+</html>

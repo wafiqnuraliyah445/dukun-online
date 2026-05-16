@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Data Payment</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+
+min-height:100vh;
+
+padding:40px;
+
+background:
+linear-gradient(
+rgba(0,0,0,0.82),
+rgba(0,0,0,0.82)
+),
+
+url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?q=80&w=1200&auto=format&fit=crop');
+
+background-size:cover;
+
+color:white;
+}
+
+h1{
+
+font-size:42px;
+
+margin-bottom:25px;
+
+color:#d4af37;
+}
+
+.table-box{
+
+background:
+rgba(20,20,20,0.75);
+
+border-radius:20px;
+
+overflow:hidden;
+
+backdrop-filter:blur(8px);
+}
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+}
+
+th{
+
+background:
+linear-gradient(
+135deg,
+#d4af37,
+#8b5e00
+);
+
+padding:18px;
+
+color:white;
+}
+
+td{
+
+padding:16px;
+
+text-align:center;
+
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+}
+
+.status{
+
+padding:6px 14px;
+
+border-radius:20px;
+
+font-size:13px;
+
+font-weight:bold;
+}
+
+.pending{
+
+background:#facc15;
+
+color:black;
+}
+
+.lunas{
+
+background:#22c55e;
+
+color:white;
+}
+
+</style>
+
+</head>
+<body>
+
+<h1>
+💰 Data Payment Ritual
+</h1>
+
+<div class="table-box">
+
+<table>
+
+<tr>
+
+<th>Client</th>
+<th>Jumlah</th>
+<th>Metode</th>
+<th>Status</th>
+<th>Tanggal</th>
+
+</tr>
+
+<% payments.forEach(p => { %>
+
+<tr>
+
+<td>
+<%= p.client_nama %>
+</td>
+
+<td>
+
+Rp
+<%= p.jumlah ? p.jumlah.toLocaleString('id-ID') : '0' %>
+
+</td>
+
+<td>
+<%= p.metode %>
+</td>
+
+<td>
+
+<span class="status <%= p.status %>">
+
+<%= p.status %>
+
+</span>
+
+</td>
+
+<td>
+<%= p.tanggal_bayar %>
+</td>
+
+</tr>
+
+<% }) %>
+
+</table>
+
+</div>
+
+</body>
+</html>

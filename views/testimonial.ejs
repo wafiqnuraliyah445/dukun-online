@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Testimoni Ritual</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            padding:40px;
+
+            background:
+            linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.82)),
+            url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop');
+
+            background-size:cover;
+            background-position:center;
+
+            color:white;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:20px;
+
+            color:#d4af37;
+            font-size:48px;
+        }
+
+        .top{
+            display:flex;
+            justify-content:center;
+
+            margin-bottom:40px;
+        }
+
+        .btn{
+            padding:14px 24px;
+
+            background:
+            linear-gradient(
+                135deg,
+                #d4af37,
+                #8b5e00
+            );
+
+            color:white;
+            text-decoration:none;
+
+            border-radius:12px;
+
+            font-weight:bold;
+
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            transform:scale(1.05);
+
+            box-shadow:
+            0 0 20px
+            rgba(212,175,55,0.4);
+        }
+
+        .container{
+            display:grid;
+
+            grid-template-columns:
+            repeat(auto-fit,minmax(320px,1fr));
+
+            gap:25px;
+        }
+
+        .card{
+
+            background:
+            rgba(20,20,20,0.75);
+
+            backdrop-filter:blur(8px);
+
+            padding:25px;
+
+            border-radius:20px;
+
+            box-shadow:
+            0 0 20px
+            rgba(0,0,0,0.4);
+
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
+
+            box-shadow:
+            0 0 20px
+            rgba(212,175,55,0.4);
+        }
+
+        .nama{
+            color:#d4af37;
+
+            font-size:22px;
+
+            margin-bottom:8px;
+
+            font-weight:bold;
+        }
+
+        .dukun{
+            color:#c084fc;
+
+            margin-bottom:12px;
+
+            font-size:14px;
+        }
+
+        .rating{
+            margin-bottom:15px;
+
+            color:#facc15;
+
+            font-size:18px;
+        }
+
+        .pesan{
+            color:#ddd;
+
+            line-height:1.7;
+
+            font-style:italic;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>🔮 Testimoni Ritual</h1>
+
+    <div class="top">
+
+        <a
+        href="/testimonial/add"
+        class="btn">
+
+        + Tambah Testimoni
+
+        </a>
+
+    </div>
+
+    <div class="container">
+
+        <% testimonials.forEach(t => { %>
+
+        <div class="card">
+
+            <div class="nama">
+                👤 <%= t.client_nama %>
+            </div>
+
+            <div class="dukun">
+                🔮 Ritual oleh
+                <%= t.dukun_nama %>
+            </div>
+
+            <div class="rating">
+                ⭐ <%= t.rating %>/5
+            </div>
+
+            <div class="pesan">
+                "<%= t.review %>"
+            </div>
+
+        </div>
+
+        <% }) %>
+
+    </div>
+
+</body>
+</html>

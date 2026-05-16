@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+Payment Ritual
+</title>
+
+<style>
+
+body{
+
+    font-family:Poppins;
+
+    background:#111;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:100vh;
+}
+
+form{
+
+    width:400px;
+
+    background:#1e1e1e;
+
+    padding:30px;
+
+    border-radius:20px;
+}
+
+h1{
+
+    margin-bottom:20px;
+
+    color:gold;
+}
+
+input,
+select{
+
+    width:100%;
+
+    margin:10px 0;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+}
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    background:gold;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+<body>
+
+<form
+action="/payment"
+method="POST">
+
+<h1>
+💰 Payment Ritual
+</h1>
+
+<input
+type="hidden"
+name="booking_id"
+value="<%= booking._id %>">
+
+<input
+type="text"
+value="<%= booking.client_nama %>"
+readonly>
+
+<input
+type="hidden"
+name="jumlah"
+value="<%= booking.harga || 0 %>">
+
+<input
+type="text"
+value="Rp <%= booking.harga ? booking.harga.toLocaleString() : '0' %>"
+readonly>
+
+<select
+name="metode"
+required>
+
+<option value="">
+Pilih Metode
+</option>
+
+<option value="Transfer">
+Transfer
+</option>
+
+<option value="Dana">
+Dana
+</option>
+
+<option value="OVO">
+OVO
+</option>
+
+<option value="Cash">
+Cash
+</option>
+
+</select>
+
+<button type="submit">
+
+Bayar Sekarang
+
+</button>
+
+</form>
+
+</body>
+</html>

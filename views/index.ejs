@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Dashboard Ritual
+    </title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+
+            min-height:100vh;
+
+            padding:40px;
+
+            background:
+            linear-gradient(
+            rgba(0,0,0,0.82),
+            rgba(0,0,0,0.82)
+            ),
+
+            url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?q=80&w=1200&auto=format&fit=crop');
+
+            background-size:cover;
+            background-position:center;
+
+            color:white;
+        }
+
+        h1{
+
+            color:#d4af37;
+
+            margin-bottom:25px;
+
+            font-size:42px;
+
+            text-shadow:
+            0 0 12px
+            rgba(212,175,55,0.5);
+        }
+
+        .top-button{
+
+            display:flex;
+
+            gap:15px;
+
+            flex-wrap:wrap;
+
+            margin-bottom:25px;
+        }
+
+        .button{
+
+            display:inline-block;
+
+            padding:12px 22px;
+
+            border-radius:12px;
+
+            text-decoration:none;
+
+            color:white;
+
+            font-weight:bold;
+
+            transition:0.3s;
+        }
+
+        .button:hover{
+
+            transform:scale(1.05);
+        }
+
+        .gold{
+
+            background:
+            linear-gradient(
+            135deg,
+            #d4af37,
+            #8b5e00
+            );
+        }
+
+        .purple{
+
+            background:
+            linear-gradient(
+            135deg,
+            #9333ea,
+            #6b21a8
+            );
+        }
+
+        .green{
+
+            background:
+            linear-gradient(
+            135deg,
+            #22c55e,
+            #166534
+            );
+        }
+
+        .red{
+
+            background:
+            linear-gradient(
+            135deg,
+            #ef4444,
+            #991b1b
+            );
+        }
+
+        .button:hover{
+
+            box-shadow:
+            0 0 15px
+            rgba(255,255,255,0.2);
+        }
+
+        .table-box{
+
+            background:
+            rgba(20,20,20,0.75);
+
+            backdrop-filter:blur(8px);
+
+            border-radius:20px;
+
+            overflow:hidden;
+
+            box-shadow:
+            0 0 30px
+            rgba(0,0,0,0.5);
+        }
+
+        table{
+
+            width:100%;
+
+            border-collapse:collapse;
+        }
+
+        th{
+
+            background:
+            linear-gradient(
+            135deg,
+            #d4af37,
+            #8b5e00
+            );
+
+            color:white;
+
+            padding:18px;
+
+            font-size:15px;
+        }
+
+        td{
+
+            padding:16px;
+
+            text-align:center;
+
+            border-bottom:
+            1px solid rgba(255,255,255,0.08);
+
+            color:#eee;
+        }
+
+        tr:hover{
+
+            background:
+            rgba(255,255,255,0.05);
+
+            transition:0.3s;
+        }
+
+        .action{
+
+            text-decoration:none;
+
+            font-weight:bold;
+
+            margin:0 5px;
+        }
+
+        .edit{
+            color:#4ade80;
+        }
+
+        .delete{
+            color:#f87171;
+        }
+
+        .status{
+
+            padding:6px 14px;
+
+            border-radius:20px;
+
+            font-size:13px;
+
+            font-weight:bold;
+        }
+
+        .diproses{
+
+            background:#facc15;
+
+            color:black;
+        }
+
+        .selesai{
+
+            background:#22c55e;
+
+            color:white;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>
+        🔮 Dashboard Ritual Dukun
+    </h1>
+
+    <div class="top-button">
+
+        <a
+        href="/services"
+        class="button gold">
+
+        🔮 Services
+
+        </a>
+
+        <a
+        href="/add"
+        class="button gold">
+
+        ➕ Tambah Ritual
+
+        </a>
+
+        <a
+        href="/testimonial"
+        class="button purple">
+
+        ⭐ Testimoni
+
+        </a>
+
+        <a
+        href="/payment-admin"
+        class="button green">
+
+        💰 Payment
+
+        </a>
+
+        <a
+        href="/logout"
+        class="button red">
+
+        🚪 Logout
+
+        </a>
+
+    </div>
+
+    <div class="table-box">
+
+        <table>
+
+            <tr>
+
+                <th>Nama Klien</th>
+                <th>Nama Dukun</th>
+                <th>Jasa</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th>Aksi</th>
+
+            </tr>
+
+            <% bookings.forEach(b => { %>
+
+            <tr>
+
+                <td>
+                    <%= b.client_nama %>
+                </td>
+
+                <td>
+                    <%= b.dukun_nama %>
+                </td>
+
+                <td>
+                    <%= b.jasa %>
+                </td>
+
+                <td>
+                    <%= b.tanggal %>
+                </td>
+
+                <td>
+
+                    <span
+                    class="status <%= b.status %>">
+
+                    <%= b.status %>
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <a
+                    href="/edit/<%= b._id %>"
+                    class="action edit">
+
+                    Edit
+
+                    </a>
+
+                    <a
+                    href="/delete/<%= b._id %>"
+                    class="action delete">
+
+                    Hapus
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            <% }) %>
+
+        </table>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Dukun</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:
+      linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+      url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?q=80&w=1200&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      overflow:hidden;
+    }
+
+    .login-box{
+      width:380px;
+      padding:40px;
+      border-radius:20px;
+      background:rgba(20,20,20,0.75);
+      backdrop-filter:blur(8px);
+      box-shadow:0 0 30px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.1);
+      color:white;
+      position:relative;
+    }
+
+    .login-box::before{
+      content:'☾';
+      position:absolute;
+      top:-20px;
+      right:20px;
+      font-size:50px;
+      color:#d4af37;
+      opacity:0.8;
+    }
+
+    h1{
+      text-align:center;
+      margin-bottom:10px;
+      font-size:32px;
+      color:#d4af37;
+      letter-spacing:2px;
+    }
+
+    .subtitle{
+      text-align:center;
+      margin-bottom:30px;
+      color:#ccc;
+      font-size:14px;
+      font-style:italic;
+    }
+
+    .input-group{
+      margin-bottom:20px;
+    }
+
+    .input-group input{
+      width:100%;
+      padding:14px;
+      border:none;
+      outline:none;
+      border-radius:12px;
+      background:rgba(255,255,255,0.08);
+      color:white;
+      font-size:14px;
+      border:1px solid transparent;
+      transition:0.3s;
+    }
+
+    .input-group input::placeholder{
+      color:#aaa;
+    }
+
+    .input-group input:focus{
+      border:1px solid #d4af37;
+      background:rgba(255,255,255,0.12);
+      box-shadow:0 0 10px rgba(212,175,55,0.4);
+    }
+
+    button{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      background:linear-gradient(135deg, #d4af37, #8b5e00);
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+
+    button:hover{
+      transform:scale(1.03);
+      box-shadow:0 0 15px rgba(212,175,55,0.5);
+    }
+
+    .footer{
+      text-align:center;
+      margin-top:20px;
+      font-size:12px;
+      color:#888;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+
+    <h1>DUKUN WEB</h1>
+    <p class="subtitle">“Membuka tabir dunia gaib digital...”</p>
+
+    <form action="/login" method="POST">
+
+      <div class="input-group">
+        <input type="text" name="username" placeholder="Masukkan nama">
+      </div>
+
+      <div class="input-group">
+        <input type="password" name="password" placeholder="Kata sandi mantra">
+      </div>
+
+      <button type="submit">Masuk Ritual</button>
+
+    </form>
+
+    <div class="footer">
+      © 2026 Paranormal System
+    </div>
+
+  </div>
+
+</body>
+</html>
