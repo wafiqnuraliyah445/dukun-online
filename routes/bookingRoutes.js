@@ -1,125 +1,48 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const path = require('path');
-const session = require('express-session');
-
-const app = express();
+const router = express.Router();
 
 // =======================
-// VIEW ENGINE
+// HOME
 // =======================
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// =======================
-// BODY PARSER
-// =======================
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-// =======================
-// SESSION
-// =======================
-
-app.use(
-    session({
-        secret: 'dukun_secret',
-        resave: false,
-        saveUninitialized: false
-    })
-);
-
-// =======================
-// MONGODB
-// =======================
-
-mongoose
-    .connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log('MongoDB Connected');
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-
-// =======================
-// MIDDLEWARE LOGIN ADMIN
-// =======================
-
-function isLogin(req, res, next) {
-    if (req.session.user) {
-        next();
-    } else {
-        res.redirect('/admin/login');
-    }
-}
-
-// =======================
-// ROUTES
-// =======================
-
-const bookingRoutes = require('./routes/bookingRoutes');
-
-app.use('/', bookingRoutes);
-
-// =======================
-// ADMIN LOGIN PAGE
-// =======================
-
-app.get('/admin/login', (req, res) => {
-    res.render('adminLogin');
+router.get('/home', (req, res) => {
+    res.render('home');
 });
 
 // =======================
-// PROCESS LOGIN ADMIN
+// SERVICES
 // =======================
 
-app.post('/admin/login', (req, res) => {
-    const { username, password } = req.body;
+router.get('/services', (req, res) => {
+    res.render('services');
+});
 
-    if (username === 'admin' && password === '123') {
-        req.session.user = username;
-        return res.redirect('/admin/dashboard');
-    }
+// =======================
+// TESTIMONIAL
+// =======================
 
-    res.send('❌ Login gagal');
+router.get('/testimonial', (req, res) => {
+    res.render('testimonial');
+});
+
+// =======================
+// PAYMENT
+// =======================
+
+router.get('/payment', (req, res) => {
+    res.render('payment');
 });
 
 // =======================
 // ADMIN DASHBOARD
 // =======================
 
-app.get('/admin/dashboard', isLogin, (req, res) => {
-    res.send('✅ Admin Dashboard');
+router.get('/dashboard', (req, res) => {
+    res.send('Dashboard Admin');
 });
 
 // =======================
-// LOGOUT
+// EXPORT
 // =======================
 
-app.get('/logout', (req, res) => {
-    req.session.destroy(() => {
-        res.redirect('/admin/login');
-    });
-});
-
-// =======================
-// HOME REDIRECT
-// =======================
-
-app.get('/', (req, res) => {
-    res.redirect('/home');
-});
-
-// =======================
-// SERVER
-// =======================
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    console.log(`Server running di port ${PORT}`);
-});
+module.exports = router;
