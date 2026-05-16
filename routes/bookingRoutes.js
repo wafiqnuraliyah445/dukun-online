@@ -1,12 +1,31 @@
 const express = require('express');
 const router = express.Router();
 
+// MODEL BOOKING
+const Booking = require('../models/Booking');
+
 // =======================
 // HOME
 // =======================
 
-router.get('/home', (req, res) => {
-    res.render('home');
+router.get('/home', async (req, res) => {
+
+    try {
+
+        const bookings = await Booking.find();
+
+        res.render('home', {
+            bookings
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.send('Error ambil data booking');
+
+    }
+
 });
 
 // =======================
@@ -34,7 +53,7 @@ router.get('/payment', (req, res) => {
 });
 
 // =======================
-// ADMIN DASHBOARD
+// DASHBOARD
 // =======================
 
 router.get('/dashboard', (req, res) => {
