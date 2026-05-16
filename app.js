@@ -185,32 +185,3 @@ app.get('/',
 
 });
 
-app.get('/admin', (req, res) => {
-
-    res.render('adminLogin');
-
-});
-
-app.post('/admin/login', (req, res) => {
-
-    const { username, password } = req.body;
-
-    if(username === 'admin' && password === '123'){
-
-        req.session.admin = true;
-
-        res.redirect('/dashboard');
-
-    } else {
-
-        res.send('Login admin gagal');
-
-    }
-
-});
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
