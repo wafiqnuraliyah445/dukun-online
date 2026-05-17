@@ -8,6 +8,7 @@ const router = express.Router();
 const Booking = require('../models/Booking');
 const Testimonial = require('../models/Testimonial');
 const Payment = require('../models/Payment');
+const Service = require('../models/Service');
 
 // =======================
 // MIDDLEWARE LOGIN ADMIN
@@ -61,23 +62,7 @@ router.get('/services', async (req, res) => {
 
     try {
 
-        let services = [];
-
-        try {
-
-            services =
-            await Service.find({})
-            .lean()
-            .maxTimeMS(5000);
-
-        } catch (dbErr) {
-
-            console.log(
-                'DB ERROR:',
-                dbErr.message
-            );
-
-        }
+        const services = await Service.find();
 
         res.render('services', {
             services
@@ -85,11 +70,11 @@ router.get('/services', async (req, res) => {
 
     } catch (err) {
 
-        console.log(err);
+        console.log("DB ERROR:", err.message);
 
-        res.send(
-            err.message
-        );
+        res.render('services', {
+            services: []
+        });
 
     }
 
