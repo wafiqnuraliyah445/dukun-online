@@ -64,6 +64,53 @@ require('./routes/bookingRoutes');
 app.use('/',
 bookingRoutes);
 
+// =======================
+// LOGIN ADMIN
+// =======================
+
+app.get('/login', (req,res)=>{
+
+    res.render('adminLogin');
+
+});
+
+app.post('/login', (req,res)=>{
+
+    const {
+        username,
+        password
+    } = req.body;
+
+    if(
+        username === 'admin'
+        &&
+        password === '123'
+    ){
+
+        req.session.user = username;
+
+        res.redirect('/admin/dashboard');
+
+    }else{
+
+        res.send('❌ Login gagal');
+
+    }
+
+});
+
+// =======================
+// LOGOUT
+// =======================
+
+app.get('/logout', (req,res)=>{
+
+    req.session.destroy();
+
+    res.redirect('/login');
+
+});
+
 
 // =======================
 // SERVER
