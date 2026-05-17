@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payment Success</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+rgba(0,0,0,.88),
+rgba(0,0,0,.92)
+),
+
+url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');
+
+background-size:cover;
+background-position:center;
+
+color:white;
+}
+
+.glow{
+
+position:absolute;
+
+width:500px;
+height:500px;
+
+background:
+radial-gradient(
+circle,
+rgba(250,204,21,.2),
+transparent 70%
+);
+
+filter:blur(50px);
+
+animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+opacity:.5;
+}
+
+50%{
+transform:scale(1.2);
+opacity:1;
+}
+
+100%{
+transform:scale(1);
+opacity:.5;
+}
+
+}
+
+.box{
+
+position:relative;
+
+z-index:2;
+
+width:500px;
+
+padding:50px;
+
+border-radius:30px;
+
+text-align:center;
+
+background:
+rgba(15,15,15,.78);
+
+backdrop-filter:blur(15px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(50px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+.icon{
+
+font-size:95px;
+
+margin-bottom:20px;
+
+animation:float 2.5s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-12px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+h1{
+
+font-size:45px;
+
+margin-bottom:15px;
+
+color:#facc15;
+}
+
+p{
+
+font-size:18px;
+
+line-height:1.8;
+
+color:#ddd;
+
+margin-bottom:35px;
+}
+
+.btn{
+
+display:inline-block;
+
+padding:16px 34px;
+
+border-radius:18px;
+
+text-decoration:none;
+
+font-weight:600;
+
+font-size:17px;
+
+color:white;
+
+background:
+linear-gradient(
+135deg,
+#9333ea,
+#6b21a8
+);
+
+transition:.3s;
+}
+
+.btn:hover{
+
+transform:scale(1.05);
+
+box-shadow:
+0 0 25px rgba(147,51,234,.35);
+}
+
+.spark{
+
+position:absolute;
+
+width:10px;
+height:10px;
+
+border-radius:50%;
+
+background:#facc15;
+
+animation:spark 4s linear infinite;
+}
+
+.spark:nth-child(1){
+top:10%;
+left:15%;
+animation-delay:0s;
+}
+
+.spark:nth-child(2){
+top:20%;
+right:18%;
+animation-delay:1s;
+}
+
+.spark:nth-child(3){
+bottom:15%;
+left:20%;
+animation-delay:2s;
+}
+
+.spark:nth-child(4){
+bottom:20%;
+right:15%;
+animation-delay:3s;
+}
+
+@keyframes spark{
+
+0%{
+transform:translateY(0) scale(1);
+opacity:0;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-80px) scale(1.8);
+opacity:0;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="glow"></div>
+
+<div class="spark"></div>
+<div class="spark"></div>
+<div class="spark"></div>
+<div class="spark"></div>
+
+<div class="box">
+
+<div class="icon">
+🔮✨
+</div>
+
+<h1>
+Payment Berhasil
+</h1>
+
+<p>
+
+Ritual berhasil dibayar 💰<br>
+Dukun sedang memproses energi mistismu...
+
+</p>
+
+<a
+href="/home"
+class="btn">
+
+Kembali ke Home
+
+</a>
+
+</div>
+
+</body>
+</html>

@@ -749,7 +749,7 @@ router.post('/payment', async (req,res)=>{
 
         );
 
-        res.redirect('/payment-admin');
+        res.redirect('/payment-success');
 
     }catch(err){
 
@@ -758,6 +758,12 @@ router.post('/payment', async (req,res)=>{
         res.send('Gagal payment');
 
     }
+
+});
+
+router.get('/payment-success',(req,res)=>{
+
+    res.render('payment-success');
 
 });
 
