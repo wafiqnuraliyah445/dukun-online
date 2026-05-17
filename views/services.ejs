@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+<title>Layanan Dukun</title>
 
-<title>
-Layanan Dukun Online
-</title>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -28,53 +20,47 @@ font-family:'Poppins',sans-serif;
 
 body{
 
+min-height:100vh;
+
+padding:50px;
+
 background:
 linear-gradient(
-rgba(0,0,0,0.82),
-rgba(0,0,0,0.92)
+rgba(0,0,0,.85),
+rgba(0,0,0,.88)
 ),
 
 url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');
 
 background-size:cover;
 background-position:center;
-background-attachment:fixed;
-
-min-height:100vh;
-
-padding:50px;
 
 color:white;
-
 }
 
-.title{
+h1{
 
 text-align:center;
 
-margin-bottom:50px;
+font-size:65px;
 
-}
-
-.title h1{
-
-font-size:55px;
-
-color:#d4af37;
+color:#facc15;
 
 margin-bottom:10px;
 
 text-shadow:
-0 0 20px rgba(212,175,55,0.5);
-
+0 0 20px rgba(250,204,21,.5);
 }
 
-.title p{
+.sub{
+
+text-align:center;
 
 color:#ddd;
 
-font-size:18px;
+font-size:22px;
 
+margin-bottom:50px;
 }
 
 .container{
@@ -85,122 +71,64 @@ grid-template-columns:
 repeat(auto-fit,minmax(320px,1fr));
 
 gap:30px;
-
 }
 
 .card{
 
 background:
-rgba(255,255,255,0.08);
+rgba(20,20,20,.75);
 
-border:
-1px solid rgba(255,255,255,0.08);
-
-backdrop-filter:blur(10px);
+border-radius:25px;
 
 padding:30px;
 
-border-radius:24px;
+backdrop-filter:blur(10px);
 
-transition:0.3s ease;
+border:
+1px solid rgba(255,255,255,.06);
 
-box-shadow:
-0 10px 30px rgba(0,0,0,0.3);
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-.card::before{
-
-content:'';
-
-position:absolute;
-
-top:0;
-left:0;
-
-width:100%;
-height:5px;
-
-background:
-linear-gradient(
-90deg,
-#d4af37,
-#9333ea
-);
-
+transition:.3s;
 }
 
 .card:hover{
 
 transform:
-translateY(-10px);
+translateY(-8px)
+scale(1.02);
 
 box-shadow:
-0 15px 35px rgba(212,175,55,0.2);
-
+0 0 25px rgba(250,204,21,.18);
 }
 
-.card h2{
+.title{
 
-font-size:28px;
+font-size:38px;
 
-color:#d4af37;
+font-weight:700;
 
-margin-bottom:18px;
+margin-bottom:20px;
 
+color:#facc15;
 }
 
 .info{
 
-margin-bottom:12px;
+font-size:18px;
 
-color:#ddd;
+line-height:1.8;
 
-line-height:1.7;
-
-font-size:15px;
-
-}
-
-.label{
-
-color:#ffffff;
-
-font-weight:600;
-
+color:#e5e5e5;
 }
 
 .price{
 
 margin-top:20px;
 
-font-size:24px;
+font-size:38px;
 
 font-weight:bold;
 
 color:#22c55e;
-
-}
-
-.empty{
-
-padding:40px;
-
-text-align:center;
-
-border-radius:20px;
-
-background:
-rgba(255,255,255,0.08);
-
-color:#ddd;
-
-font-size:18px;
-
 }
 
 .back{
@@ -209,7 +137,13 @@ display:inline-block;
 
 margin-top:50px;
 
-padding:15px 28px;
+padding:16px 28px;
+
+border-radius:18px;
+
+text-decoration:none;
+
+font-weight:600;
 
 background:
 linear-gradient(
@@ -218,110 +152,60 @@ linear-gradient(
 #6b21a8
 );
 
-border-radius:15px;
-
-text-decoration:none;
-
 color:white;
 
-font-weight:600;
-
-transition:0.3s;
-
+transition:.3s;
 }
 
 .back:hover{
 
 transform:scale(1.05);
-
-}
-
-@media(max-width:768px){
-
-body{
-
-padding:25px;
-
-}
-
-.title h1{
-
-font-size:38px;
-
-}
-
 }
 
 </style>
 
 </head>
-
 <body>
-
-<div class="title">
 
 <h1>
 🔮 Layanan Dukun Online
 </h1>
 
-<p>
+<div class="sub">
 Pilih ritual terbaik sesuai kebutuhan hidupmu
-</p>
-
 </div>
 
 <div class="container">
 
-<% if(services && services.length > 0){ %>
+<% services.forEach(service => { %>
 
-    <% services.forEach(service => { %>
+<div class="card">
 
-        <div class="card">
+<div class="title">
+<%= service.nama_jasa %>
+</div>
 
-            <h2>
-                <%= service.nama_jasa %>
-            </h2>
+<div class="info">
 
-            <div class="info">
+⏳ Durasi:
+<%= service.durasi_hari %> Hari
 
-                <span class="label">
-                    👤 Dukun:
-                </span>
+<br><br>
 
-                <%= service.nama_dukun %>
+⚠️ Efek Samping:
+<%= service.efek_samping %>
 
-            </div>
+</div>
 
-            <div class="info">
+<div class="price">
 
-                <span class="label">
-                    📝 Deskripsi:
-                </span>
+Rp <%= Number(service.harga_jasa).toLocaleString('id-ID') %>
 
-                <%= service.deskripsi %>
+</div>
 
-            </div>
+</div>
 
-            <div class="price">
-
-                Rp
-                <%= service.harga_jasa %>
-
-            </div>
-
-        </div>
-
-    <% }) %>
-
-<% } else { %>
-
-    <div class="empty">
-
-        Belum ada layanan tersedia 🔮
-
-    </div>
-
-<% } %>
+<% }) %>
 
 </div>
 
