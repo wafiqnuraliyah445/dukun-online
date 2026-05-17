@@ -457,20 +457,23 @@ async (req, res) => {
 
 });
 
-// =======================
-// EXPORT
-// =======================
-router.get('/admin/dashboard', async (req,res)=>{
+router.get('/home', async (req,res)=>{
 
-    const bookings =
-    await Booking.find();
+    try {
 
-    res.render(
-        'admin/dashboard',
-        { bookings }
-    );
+        const bookings = await Booking.find();
+
+        res.render('admin/dashboard',{
+            bookings
+        });
+
+    } catch(err){
+
+        console.log(err);
+        res.send('Gagal membuka home');
+
+    }
 
 });
 
 module.exports = router;
-
