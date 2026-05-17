@@ -195,27 +195,27 @@ router.post('/add', async (req,res)=>{
             harga = 650000;
         }
 
-        const newBooking =
-        new Booking({
+const newBooking =
+new Booking({
 
-            client_nama:
-            req.body.client_nama,
+    client_nama:
+    req.body.client_nama,
 
-            dukun_nama:
-            req.body.dukun_nama,
+    dukun_nama:
+    req.body.dukun_nama,
 
-            jasa:
-            req.body.jasa,
+    jasa:
+    req.body.jasa,
 
-            tanggal:
-            req.body.tanggal,
+    tanggal:
+    req.body.tanggal,
 
-            status:'diproses'
+    status:'diproses',
 
-            harga:
-            harga
+    harga:
+    harga
 
-        });
+});
 
         await newBooking.save();
 
