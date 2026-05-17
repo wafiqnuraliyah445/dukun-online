@@ -1,258 +1,104 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <title>
+        Services
+    </title>
 
-<title>
-Daftar Ritual
-</title>
+    <style>
 
-<style>
+        body{
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+            background:#111827;
+            color:white;
 
-body{
+            font-family:Poppins;
 
-    min-height:100vh;
+            padding:40px;
 
-    padding:40px;
+        }
 
-    background:
-    linear-gradient(
-    rgba(0,0,0,0.82),
-    rgba(0,0,0,0.82)
-    ),
+        h1{
 
-    url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?q=80&w=1200&auto=format&fit=crop');
+            color:#d4af37;
 
-    background-size:cover;
+            margin-bottom:30px;
 
-    background-position:center;
+        }
 
-    color:white;
-}
+        .card{
 
-.back{
+            background:#1f2937;
 
-    display:inline-block;
+            padding:20px;
 
-    margin-bottom:30px;
+            border-radius:15px;
 
-    color:white;
+            margin-bottom:20px;
 
-    text-decoration:none;
+        }
 
-    font-weight:bold;
+        a{
 
-    transition:0.3s;
-}
+            color:#d4af37;
 
-.back:hover{
+            text-decoration:none;
 
-    color:#d4af37;
-}
+        }
 
-h1{
-
-    color:#d4af37;
-
-    margin-bottom:40px;
-
-    font-size:42px;
-
-    text-shadow:
-    0 0 15px
-    rgba(212,175,55,0.5);
-
-}
-
-.container{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(320px,1fr));
-
-    gap:25px;
-
-}
-
-.card{
-
-    background:
-    rgba(20,20,20,0.75);
-
-    backdrop-filter:blur(8px);
-
-    padding:30px;
-
-    border-radius:20px;
-
-    box-shadow:
-    0 0 25px
-    rgba(0,0,0,0.4);
-
-    transition:0.3s;
-}
-
-.card:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:
-    0 0 20px
-    rgba(212,175,55,0.4);
-
-}
-
-.nama{
-
-    color:#d4af37;
-
-    font-size:28px;
-
-    margin-bottom:20px;
-
-    font-weight:bold;
-}
-
-.info{
-
-    margin-bottom:14px;
-
-    color:#ddd;
-
-    line-height:1.7;
-}
-
-.harga{
-
-    margin-top:18px;
-
-    font-size:24px;
-
-    color:#4ade80;
-
-    font-weight:bold;
-}
-
-.btn{
-
-    display:inline-block;
-
-    margin-top:25px;
-
-    padding:14px 22px;
-
-    background:
-    linear-gradient(
-        135deg,
-        #9333ea,
-        #6b21a8
-    );
-
-    color:white;
-
-    text-decoration:none;
-
-    border-radius:14px;
-
-    font-weight:bold;
-
-    transition:0.3s;
-}
-
-.btn:hover{
-
-    transform:scale(1.05);
-
-    box-shadow:
-    0 0 15px
-    rgba(147,51,234,0.5);
-
-}
-
-</style>
+    </style>
 
 </head>
+
 <body>
 
-<a href="/dashboard" class="back">
-
-← Kembali
-
-</a>
-
 <h1>
-
-🔮 Daftar Ritual
-
+🔮 Layanan Dukun Online
 </h1>
-
-<div class="container">
-
-<% services.forEach(s => { %>
 
 <div class="card">
 
-<div class="nama">
+    <h2>
+        Pelet Cinta
+    </h2>
 
-<%= s.nama_jasa %>
-
-</div>
-
-<div class="info">
-
-⏳ Durasi:
-<b>
-
-<%= s.durasi_hari %> hari
-
-</b>
+    <p>
+        Membuat doi makin sayang 😈
+    </p>
 
 </div>
 
-<div class="info">
+<div class="card">
 
-⚠️ Efek:
-<b>
+    <h2>
+        Santet Mantan
+    </h2>
 
-<%= s.efek_samping %>
-
-</b>
-
-</div>
-
-<div class="harga">
-
-Rp
-<%= Number(s.harga_jasa || 0).toLocaleString('id-ID') %>
+    <p>
+        Cocok untuk balas dendam 😭
+    </p>
 
 </div>
 
-<a
-href="/add?service=<%= s.nama_jasa %>"
-class="btn">
+<div class="card">
 
-Tambah Pesanan
+    <h2>
+        Penglaris
+    </h2>
 
+    <p>
+        Bikin dagangan makin laris 🔥
+    </p>
+
+</div>
+
+<a href="/home">
+← Kembali Home
 </a>
-
-</div>
-
-<% }) %>
-
-</div>
 
 </body>
 </html>
