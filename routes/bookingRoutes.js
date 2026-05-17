@@ -169,38 +169,88 @@ router.get('/add', (req, res) => {
 // SIMPAN BOOKING
 // =======================
 
-router.post('/add', async (req, res) => {
+router.post('/add', async (req,res)=>{
 
-    try {
+    try{
 
-        const {
+        let harga = 0;
 
-            client_nama,
-            dukun_nama,
-            jasa,
-            tanggal,
-            status
+        if(req.body.jasa === 'Pelet Anti Ghosting'){
+            harga = 500000;
+        }
 
-        } = req.body;
+        else if(req.body.jasa === 'Penglaris Dagangan'){
+            harga = 300000;
+        }
+
+        else if(req.body.jasa === 'Santet Halus'){
+            harga = 750000;
+        }
+
+        else if(req.body.jasa === 'Buka Aura'){
+            harga = 450000;
+        }
+
+        else if(req.body.jasa === 'Pengasihan Mantan'){
+            harga = 650000;
+        }
 
         const newBooking =
         new Booking({
 
-            client_nama,
-            dukun_nama,
-            jasa,
-            tanggal,
+            client_nama:
+            req.body.client_nama,
+
+            dukun_nama:
+            req.body.dukun_nama,
+
+            jasa:
+            req.body.jasa,
+
+            tanggal:
+            req.body.tanggal,
 
             status:
-            status || 'diproses'
+            req.body.status,
+
+            harga:
+            harga
 
         });
 
         await newBooking.save();
 
-        res.redirect('/home');
+        const newPayment =
+        new Payment({
 
-    } catch (err) {
+            client_nama:
+            req.body.client_nama,
+
+            jumlah:
+            harga,
+
+            metode:
+            'Belum Dipilih',
+
+            status:
+            'pending',
+
+            tanggal_bayar:
+            new Date()
+            .toISOString()
+            .split('T')[0]
+
+        });
+
+        await newPayment.save();
+
+        res.render('payment', {
+
+            booking: newBooking
+
+        });
+
+    }catch(err){
 
         console.log(err);
 
