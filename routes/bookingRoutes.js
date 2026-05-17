@@ -221,26 +221,29 @@ router.post('/add', async (req,res)=>{
         await newBooking.save();
 
         const newPayment =
-        new Payment({
+new Payment({
 
-            client_nama:
-            req.body.client_nama,
+    booking_id:
+    newBooking._id,
 
-            jumlah:
-            harga,
+    client_nama:
+    req.body.client_nama,
 
-            metode:
-            'Belum Dipilih',
+    jumlah:
+    harga,
 
-            status:
-            'pending',
+    metode:
+    'Belum Dipilih',
 
-            tanggal_bayar:
-            new Date()
-            .toISOString()
-            .split('T')[0]
+    status:
+    'pending',
 
-        });
+    tanggal_bayar:
+    new Date()
+    .toISOString()
+    .split('T')[0]
+
+});
 
         await newPayment.save();
 
@@ -729,27 +732,24 @@ router.post('/payment', async (req,res)=>{
         const {
 
             booking_id,
-            jumlah,
             metode
 
         } = req.body;
 
         await Payment.findOneAndUpdate(
 
-            { booking_id: booking_id },
-
             {
-
-                metode: metode,
-                status: 'lunas'
-
+                booking_id: booking_id
             },
 
-            { new:true }
+            {
+                metode: metode,
+                status: 'lunas'
+            }
 
         );
 
-        res.redirect('/home');
+        res.redirect('/payment-admin');
 
     }catch(err){
 
