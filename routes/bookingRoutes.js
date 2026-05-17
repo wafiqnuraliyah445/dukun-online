@@ -42,19 +42,11 @@ router.get('/', (req, res) => {
 // HOME
 // =======================
 
-router.get('/home', (req, res) => {
+router.get('/add', (req,res)=>{
 
-    try {
-
-        res.render('home');
-
-    } catch (err) {
-
-        console.log(err);
-
-        res.send('Gagal membuka home');
-
-    }
+    res.render('add', {
+        selectedService: ''
+    });
 
 });
 
