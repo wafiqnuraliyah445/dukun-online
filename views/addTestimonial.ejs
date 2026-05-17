@@ -1,111 +1,225 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
+
 <title>Tambah Testimoni</title>
 
 <style>
 
-body{
-    font-family:Poppins;
-    background:#111;
-    color:white;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    height:100vh;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
 }
 
-form{
-    width:400px;
+body{
 
-    background:#1e1e1e;
+background:
+linear-gradient(
+rgba(0,0,0,0.85),
+rgba(0,0,0,0.9)
+),
 
-    padding:30px;
+url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');
 
-    border-radius:20px;
+background-size:cover;
+background-position:center;
+
+min-height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:40px;
+}
+
+.container{
+
+width:100%;
+max-width:550px;
+
+background:
+rgba(255,255,255,0.08);
+
+backdrop-filter:blur(10px);
+
+padding:40px;
+
+border-radius:25px;
+
+box-shadow:
+0 0 40px rgba(0,0,0,0.5);
+
+border:
+1px solid rgba(255,255,255,0.1);
+
+}
+
+h1{
+
+color:#d4af37;
+
+font-size:42px;
+
+margin-bottom:30px;
+
+text-align:center;
+
+text-shadow:
+0 0 20px rgba(212,175,55,0.5);
+
 }
 
 input,
 textarea,
 select{
-    width:100%;
 
-    margin:10px 0;
-    padding:14px;
+width:100%;
 
-    border:none;
-    border-radius:10px;
+padding:16px;
+
+margin-bottom:20px;
+
+border:none;
+
+border-radius:15px;
+
+background:
+rgba(255,255,255,0.12);
+
+color:white;
+
+font-size:16px;
+
+outline:none;
+
+}
+
+textarea{
+
+height:140px;
+
+resize:none;
+
+}
+
+option{
+
+background:#111;
+color:white;
+
 }
 
 button{
-    width:100%;
 
-    padding:14px;
+width:100%;
 
-    border:none;
+padding:16px;
 
-    background:gold;
-    color:black;
+border:none;
 
-    font-weight:bold;
+border-radius:15px;
 
-    border-radius:10px;
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+background:
+linear-gradient(
+135deg,
+#9333ea,
+#6b21a8
+);
+
+color:white;
+
+transition:0.3s;
+
+}
+
+button:hover{
+
+transform:scale(1.03);
+
+box-shadow:
+0 0 20px rgba(147,51,234,0.5);
+
+}
+
+.back{
+
+display:block;
+
+margin-top:20px;
+
+text-align:center;
+
+color:#d4af37;
+
+text-decoration:none;
+
 }
 
 </style>
 
 </head>
+
 <body>
 
-<form
-action="/testimonial/add"
-method="POST">
+<div class="container">
 
-<h1>🔮 Tambah Testimoni</h1>
+<h1>
+🔮 Tambah Testimoni
+</h1>
+
+<form action="/testimonial/add" method="POST">
 
 <input
 type="text"
 name="client_nama"
-placeholder="Nama Kamu"
-required>
+placeholder="Nama kamu..."
+required
+>
 
 <select
 name="dukun_nama"
-required>
+required
+>
 
 <option value="">
 Pilih Dukun
 </option>
 
 <option>
-Mbah Coding
+Mbah Suro
 </option>
 
 <option>
-Ki Debugging
+Ki Joko
 </option>
 
 <option>
-Nyi Stackoverflow
-</option>
-
-<option>
-Mbah Query
+Mbah Drajat
 </option>
 
 </select>
 
 <textarea
 name="review"
-placeholder="Ceritakan pengalaman ritual..."
-required></textarea>
+placeholder="Ceritakan pengalaman ritualmu..."
+required
+></textarea>
 
 <select
 name="rating"
-required>
+required
+>
 
 <option value="">
 Rating
@@ -123,13 +237,34 @@ Rating
 ⭐⭐⭐
 </option>
 
+<option value="2">
+⭐⭐
+</option>
+
+<option value="1">
+⭐
+</option>
+
 </select>
 
 <button type="submit">
-Kirim Testimoni
+
+Kirim Testimoni ✨
+
 </button>
 
 </form>
+
+<a
+href="/testimonial"
+class="back"
+>
+
+← Lihat Semua Testimoni
+
+</a>
+
+</div>
 
 </body>
 </html>

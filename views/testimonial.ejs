@@ -1,191 +1,347 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Testimoni Ritual</title>
 
-    <style>
+<meta charset="UTF-8">
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Poppins', sans-serif;
-        }
+<title>
+Testimoni Ritual
+</title>
 
-        body{
-            min-height:100vh;
-            padding:40px;
+<style>
 
-            background:
-            linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.82)),
-            url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop');
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
 
-            background-size:cover;
-            background-position:center;
+body{
 
-            color:white;
-        }
+background:
+linear-gradient(
+rgba(0,0,0,0.88),
+rgba(0,0,0,0.92)
+),
 
-        h1{
-            text-align:center;
-            margin-bottom:20px;
+url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');
 
-            color:#d4af37;
-            font-size:48px;
-        }
+background-size:cover;
+background-position:center;
 
-        .top{
-            display:flex;
-            justify-content:center;
+min-height:100vh;
 
-            margin-bottom:40px;
-        }
+padding:50px;
 
-        .btn{
-            padding:14px 24px;
+color:white;
 
-            background:
-            linear-gradient(
-                135deg,
-                #d4af37,
-                #8b5e00
-            );
+}
 
-            color:white;
-            text-decoration:none;
+.header{
 
-            border-radius:12px;
+text-align:center;
 
-            font-weight:bold;
+margin-bottom:50px;
 
-            transition:0.3s;
-        }
+}
 
-        .btn:hover{
-            transform:scale(1.05);
+.header h1{
 
-            box-shadow:
-            0 0 20px
-            rgba(212,175,55,0.4);
-        }
+font-size:65px;
 
-        .container{
-            display:grid;
+color:#d4af37;
 
-            grid-template-columns:
-            repeat(auto-fit,minmax(320px,1fr));
+text-shadow:
+0 0 25px rgba(212,175,55,0.5);
 
-            gap:25px;
-        }
+margin-bottom:15px;
 
-        .card{
+}
 
-            background:
-            rgba(20,20,20,0.75);
+.header p{
 
-            backdrop-filter:blur(8px);
+font-size:22px;
 
-            padding:25px;
+color:#ddd;
 
-            border-radius:20px;
+}
 
-            box-shadow:
-            0 0 20px
-            rgba(0,0,0,0.4);
+.container{
 
-            transition:0.3s;
-        }
+display:grid;
 
-        .card:hover{
-            transform:translateY(-5px);
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
 
-            box-shadow:
-            0 0 20px
-            rgba(212,175,55,0.4);
-        }
+gap:30px;
 
-        .nama{
-            color:#d4af37;
+}
 
-            font-size:22px;
+.card{
 
-            margin-bottom:8px;
+background:
+rgba(255,255,255,0.08);
 
-            font-weight:bold;
-        }
+backdrop-filter:blur(10px);
 
-        .dukun{
-            color:#c084fc;
+border:
+1px solid rgba(255,255,255,0.1);
 
-            margin-bottom:12px;
+padding:30px;
 
-            font-size:14px;
-        }
+border-radius:25px;
 
-        .rating{
-            margin-bottom:15px;
+transition:0.3s;
 
-            color:#facc15;
+box-shadow:
+0 0 30px rgba(0,0,0,0.4);
 
-            font-size:18px;
-        }
+position:relative;
 
-        .pesan{
-            color:#ddd;
+overflow:hidden;
 
-            line-height:1.7;
+}
 
-            font-style:italic;
-        }
+.card:hover{
 
-    </style>
+transform:
+translateY(-10px);
+
+box-shadow:
+0 0 40px rgba(147,51,234,0.5);
+
+}
+
+.glow{
+
+position:absolute;
+
+top:-50px;
+right:-50px;
+
+width:150px;
+height:150px;
+
+background:
+rgba(147,51,234,0.3);
+
+border-radius:50%;
+
+filter:blur(50px);
+
+}
+
+.nama{
+
+font-size:28px;
+
+font-weight:bold;
+
+margin-bottom:10px;
+
+color:#fff;
+
+}
+
+.dukun{
+
+color:#d4af37;
+
+font-size:18px;
+
+margin-bottom:15px;
+
+}
+
+.review{
+
+line-height:1.8;
+
+color:#ddd;
+
+margin-bottom:20px;
+
+}
+
+.rating{
+
+font-size:24px;
+
+color:#facc15;
+
+}
+
+.empty{
+
+text-align:center;
+
+font-size:24px;
+
+margin-top:100px;
+
+color:#ddd;
+
+background:
+rgba(255,255,255,0.08);
+
+padding:40px;
+
+border-radius:20px;
+
+}
+
+.buttons{
+
+margin-top:50px;
+
+display:flex;
+
+gap:20px;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+a{
+
+padding:16px 30px;
+
+border-radius:16px;
+
+text-decoration:none;
+
+font-weight:bold;
+
+transition:0.3s;
+
+}
+
+.add{
+
+background:
+linear-gradient(
+135deg,
+#9333ea,
+#6b21a8
+);
+
+color:white;
+
+}
+
+.home{
+
+background:
+linear-gradient(
+135deg,
+#d4af37,
+#8b5e00
+);
+
+color:white;
+
+}
+
+a:hover{
+
+transform:scale(1.05);
+
+}
+
+</style>
 
 </head>
+
 <body>
 
-    <h1>🔮 Testimoni Ritual</h1>
+<div class="header">
 
-    <div class="top">
+<h1>
+🔮 Testimoni Ritual
+</h1>
 
-        <a
-        href="/testimonial/add"
-        class="btn">
+<p>
+Cerita para pelanggan setelah memakai jasa mistis kami ✨
+</p>
 
-        + Tambah Testimoni
+</div>
 
-        </a>
+<% if(testimonials.length > 0){ %>
 
-    </div>
+<div class="container">
 
-    <div class="container">
+<% testimonials.forEach(data => { %>
 
-        <% testimonials.forEach(t => { %>
+<div class="card">
 
-        <div class="card">
+<div class="glow"></div>
 
-            <div class="nama">
-                👤 <%= t.client_nama %>
-            </div>
+<div class="nama">
 
-            <div class="dukun">
-                🔮 Ritual oleh
-                <%= t.dukun_nama %>
-            </div>
+👤 <%= data.client_nama %>
 
-            <div class="rating">
-                ⭐ <%= t.rating %>/5
-            </div>
+</div>
 
-            <div class="pesan">
-                "<%= t.review %>"
-            </div>
+<div class="dukun">
 
-        </div>
+🔮 Dibantu oleh:
+<%= data.dukun_nama %>
 
-        <% }) %>
+</div>
 
-    </div>
+<div class="review">
+
+“<%= data.review %>”
+
+</div>
+
+<div class="rating">
+
+<%= "⭐".repeat(data.rating) %>
+
+</div>
+
+</div>
+
+<% }) %>
+
+</div>
+
+<% } else { %>
+
+<div class="empty">
+
+Belum ada testimoni ritual 😭
+
+</div>
+
+<% } %>
+
+<div class="buttons">
+
+<a
+href="/testimonial/add"
+class="add"
+>
+
+Tambah Testimoni ✨
+
+</a>
+
+<a
+href="/home"
+class="home"
+>
+
+← Kembali Home
+
+</a>
+
+</div>
 
 </body>
 </html>
