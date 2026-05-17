@@ -468,9 +468,6 @@ async (req, res) => {
 // =======================
 // EXPORT
 // =======================
-
-module.exports = router;
-
 router.get('/admin/dashboard', async (req,res)=>{
 
     const bookings =
@@ -482,3 +479,6 @@ router.get('/admin/dashboard', async (req,res)=>{
     );
 
 });
+
+module.exports = router;
+
