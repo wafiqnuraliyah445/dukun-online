@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Data Payment</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -10,117 +17,229 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Poppins;
+font-family:'Poppins',sans-serif;
 }
 
 body{
 
 min-height:100vh;
-
 padding:40px;
 
 background:
 linear-gradient(
-rgba(0,0,0,0.82),
-rgba(0,0,0,0.82)
+rgba(0,0,0,.88),
+rgba(0,0,0,.92)
 ),
 
 url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?q=80&w=1200&auto=format&fit=crop');
 
 background-size:cover;
+background-position:center;
+background-attachment:fixed;
 
 color:white;
 }
 
-h1{
+.title{
 
-font-size:42px;
+font-size:55px;
+font-weight:700;
 
-margin-bottom:25px;
+color:#facc15;
 
-color:#d4af37;
+margin-bottom:35px;
+
+text-shadow:
+0 0 20px rgba(250,204,21,.5);
+}
+
+.topbar{
+
+margin-bottom:30px;
+}
+
+.btn{
+
+display:inline-block;
+
+padding:14px 24px;
+
+border-radius:18px;
+
+text-decoration:none;
+
+font-weight:600;
+
+color:white;
+
+background:
+linear-gradient(
+135deg,
+#9333ea,
+#6b21a8
+);
+
+transition:.3s;
+}
+
+.btn:hover{
+
+transform:
+translateY(-4px);
+
 }
 
 .table-box{
 
 background:
-rgba(20,20,20,0.75);
+rgba(255,255,255,.08);
 
-border-radius:20px;
+backdrop-filter:blur(10px);
+
+border-radius:25px;
 
 overflow:hidden;
 
-backdrop-filter:blur(8px);
+box-shadow:
+0 0 30px rgba(0,0,0,.3);
 }
 
 table{
 
 width:100%;
-
 border-collapse:collapse;
 }
 
-th{
+thead{
 
 background:
 linear-gradient(
 135deg,
-#d4af37,
-#8b5e00
+#facc15,
+#ca8a04
 );
 
-padding:18px;
-
-color:white;
 }
 
-td{
+thead th{
 
-padding:16px;
+padding:20px;
+font-size:18px;
+color:black;
+}
 
-text-align:center;
+tbody tr{
 
 border-bottom:
-1px solid rgba(255,255,255,0.08);
+1px solid rgba(255,255,255,.08);
+
+transition:.3s;
+}
+
+tbody tr:hover{
+
+background:
+rgba(255,255,255,.05);
+}
+
+tbody td{
+
+padding:18px;
+text-align:center;
+color:#eee;
 }
 
 .status{
 
-padding:6px 14px;
+padding:8px 18px;
 
-border-radius:20px;
+border-radius:999px;
 
-font-size:13px;
+font-size:14px;
 
-font-weight:bold;
+font-weight:600;
+
+display:inline-block;
 }
 
 .pending{
 
 background:#facc15;
-
 color:black;
 }
 
 .lunas{
 
 background:#22c55e;
-
 color:white;
+}
+
+.empty{
+
+padding:60px;
+text-align:center;
+font-size:22px;
+color:#bbb;
+}
+
+@media(max-width:768px){
+
+.title{
+font-size:38px;
+}
+
+thead{
+display:none;
+}
+
+table,
+tbody,
+tr,
+td{
+display:block;
+width:100%;
+}
+
+tr{
+padding:20px;
+margin-bottom:20px;
+}
+
+td{
+text-align:left;
+padding:12px 20px;
+}
+
 }
 
 </style>
 
 </head>
+
 <body>
 
-<h1>
+<h1 class="title">
 💰 Data Payment Ritual
 </h1>
 
+<div class="topbar">
+
+<a href="/admin/dashboard"
+class="btn">
+
+⬅ Kembali Dashboard
+
+</a>
+
+</div>
+
 <div class="table-box">
 
+<% if(payments.length > 0){ %>
+
 <table>
+
+<thead>
 
 <tr>
 
@@ -132,12 +251,16 @@ color:white;
 
 </tr>
 
+</thead>
+
+<tbody>
+
 <% payments.forEach(p => { %>
 
 <tr>
 
 <td>
-<%= p.client_nama %>
+<%= p.client_nama || '-' %>
 </td>
 
 <td>
@@ -148,28 +271,40 @@ Rp
 </td>
 
 <td>
-<%= p.metode %>
+<%= p.metode || '-' %>
 </td>
 
 <td>
 
-<span class="status <%= p.status %>">
+<span class="status <%= p.status === 'lunas' ? 'lunas' : 'pending' %>">
 
-<%= p.status %>
+<%= p.status || 'pending' %>
 
 </span>
 
 </td>
 
 <td>
-<%= p.tanggal_bayar %>
+<%= p.tanggal_bayar || '-' %>
 </td>
 
 </tr>
 
 <% }) %>
 
+</tbody>
+
 </table>
+
+<% } else { %>
+
+<div class="empty">
+
+Belum ada payment ritual 🔮
+
+</div>
+
+<% } %>
 
 </div>
 
