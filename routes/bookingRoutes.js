@@ -62,7 +62,9 @@ router.get('/services', async (req, res) => {
 
     try {
 
-        const services = await Service.find();
+        const services = await Service.find({});
+
+        console.log(services);
 
         res.render('services', {
             services
@@ -70,7 +72,7 @@ router.get('/services', async (req, res) => {
 
     } catch (err) {
 
-        console.log("DB ERROR:", err.message);
+        console.log(err);
 
         res.render('services', {
             services: []
