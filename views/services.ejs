@@ -3,54 +3,159 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <title>
-        Services
-    </title>
+<title>
+Layanan Dukun Online
+</title>
 
-    <style>
+<style>
 
-        body{
+*{
 
-            background:#111827;
-            color:white;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
 
-            font-family:Poppins;
+}
 
-            padding:40px;
+body{
 
-        }
+background:
+linear-gradient(
+rgba(0,0,0,0.8),
+rgba(0,0,0,0.9)
+),
 
-        h1{
+url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');
 
-            color:#d4af37;
+background-size:cover;
 
-            margin-bottom:30px;
+color:white;
 
-        }
+padding:50px;
 
-        .card{
+min-height:100vh;
 
-            background:#1f2937;
+}
 
-            padding:20px;
+h1{
 
-            border-radius:15px;
+font-size:50px;
 
-            margin-bottom:20px;
+color:#d4af37;
 
-        }
+margin-bottom:40px;
 
-        a{
+text-shadow:
+0 0 20px rgba(212,175,55,0.5);
 
-            color:#d4af37;
+}
 
-            text-decoration:none;
+.container{
 
-        }
+display:grid;
 
-    </style>
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
+
+gap:30px;
+
+}
+
+.card{
+
+background:
+rgba(255,255,255,0.08);
+
+backdrop-filter:blur(10px);
+
+padding:30px;
+
+border-radius:20px;
+
+transition:0.3s;
+
+box-shadow:
+0 0 20px rgba(0,0,0,0.3);
+
+}
+
+.card:hover{
+
+transform:
+translateY(-10px);
+
+box-shadow:
+0 0 30px rgba(212,175,55,0.3);
+
+}
+
+.card h2{
+
+font-size:28px;
+
+color:#d4af37;
+
+margin-bottom:15px;
+
+}
+
+.card p{
+
+margin-bottom:10px;
+
+color:#ddd;
+
+}
+
+.price{
+
+font-size:22px;
+
+font-weight:bold;
+
+color:#22c55e;
+
+margin-top:15px;
+
+}
+
+a{
+
+display:inline-block;
+
+margin-top:50px;
+
+padding:14px 25px;
+
+background:
+linear-gradient(
+135deg,
+#9333ea,
+#6b21a8
+);
+
+border-radius:15px;
+
+text-decoration:none;
+
+color:white;
+
+font-weight:bold;
+
+transition:0.3s;
+
+}
+
+a:hover{
+
+transform:scale(1.05);
+
+}
+
+</style>
 
 </head>
 
@@ -60,44 +165,43 @@
 🔮 Layanan Dukun Online
 </h1>
 
+<div class="container">
+
+<% services.forEach(service => { %>
+
 <div class="card">
 
-    <h2>
-        Pelet Cinta
-    </h2>
+<h2>
+<%= service.nama_jasa %>
+</h2>
 
-    <p>
-        Membuat doi makin sayang 😈
-    </p>
+<p>
+👤 Dukun:
+<%= service.nama_dukun %>
+</p>
+
+<p>
+📝
+<%= service.deskripsi %>
+</p>
+
+<div class="price">
+
+Rp
+<%= service.harga_jasa %>
 
 </div>
 
-<div class="card">
-
-    <h2>
-        Santet Mantan
-    </h2>
-
-    <p>
-        Cocok untuk balas dendam 😭
-    </p>
-
 </div>
 
-<div class="card">
-
-    <h2>
-        Penglaris
-    </h2>
-
-    <p>
-        Bikin dagangan makin laris 🔥
-    </p>
+<% }) %>
 
 </div>
 
 <a href="/home">
+
 ← Kembali Home
+
 </a>
 
 </body>

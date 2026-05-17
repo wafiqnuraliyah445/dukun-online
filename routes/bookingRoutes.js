@@ -61,17 +61,24 @@ router.get('/home', (req, res) => {
 // SERVICES
 // =======================
 
-router.get('/services', (req, res) => {
+const Service = require('../models/Service');
+
+router.get('/services', async (req, res) => {
 
     try {
 
-        res.render('services');
+        const services =
+        await Service.find();
+
+        res.render('services', {
+            services
+        });
 
     } catch (err) {
 
         console.log(err);
 
-        res.send('Gagal membuka services');
+        res.send(err.message);
 
     }
 
