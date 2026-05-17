@@ -57,18 +57,27 @@ router.get('/home', (req, res) => {
 
 });
 
-// =======================
-// SERVICES
-// =======================
-
-const Service = require('../models/Service');
-
 router.get('/services', async (req, res) => {
 
     try {
 
-        const services =
-        await Service.find();
+        let services = [];
+
+        try {
+
+            services =
+            await Service.find({})
+            .lean()
+            .maxTimeMS(5000);
+
+        } catch (dbErr) {
+
+            console.log(
+                'DB ERROR:',
+                dbErr.message
+            );
+
+        }
 
         res.render('services', {
             services
@@ -78,7 +87,9 @@ router.get('/services', async (req, res) => {
 
         console.log(err);
 
-        res.send(err.message);
+        res.send(
+            err.message
+        );
 
     }
 
