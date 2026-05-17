@@ -646,6 +646,28 @@ async(req,res)=>{
 
 });
 
+router.get('/payment-admin', async (req, res) => {
+
+    try {
+
+        const payments =
+        await Payment.find();
+
+        res.render(
+            'paymentAdmin',
+            { payments }
+        );
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.send('Gagal membuka payment');
+
+    }
+
+});
+
 // =======================
 // EXPORT ROUTER
 // =======================
