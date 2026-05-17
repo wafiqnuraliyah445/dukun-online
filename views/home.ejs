@@ -7,7 +7,7 @@
 
 <title>Web Dukun Online</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -25,14 +25,15 @@ min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 
-padding:30px;
+padding:40px;
+
+overflow:hidden;
 
 background:
 linear-gradient(
-rgba(0,0,0,.84),
-rgba(0,0,0,.88)
+rgba(0,0,0,.82),
+rgba(0,0,0,.9)
 ),
 
 url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');
@@ -40,48 +41,96 @@ url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');
 background-size:cover;
 background-position:center;
 
-overflow:hidden;
-
 color:white;
+
+position:relative;
 }
 
-.glow{
+/* GLOW EFFECT */
+
+.glow1,
+.glow2{
 
 position:absolute;
 
-width:500px;
-height:500px;
+border-radius:50%;
 
-background:
-radial-gradient(
-circle,
-rgba(250,204,21,.18),
-transparent 70%
-);
-
-filter:blur(40px);
-
-top:-100px;
-right:-100px;
+filter:blur(90px);
 
 z-index:0;
 }
+
+.glow1{
+
+width:350px;
+height:350px;
+
+background:rgba(250,204,21,.18);
+
+top:-80px;
+left:-80px;
+}
+
+.glow2{
+
+width:400px;
+height:400px;
+
+background:rgba(147,51,234,.18);
+
+bottom:-120px;
+right:-100px;
+}
+
+/* CARD */
 
 .container{
 
 position:relative;
 z-index:2;
 
+width:100%;
+max-width:1100px;
+
+padding:60px;
+
+border-radius:35px;
+
+background:rgba(15,15,15,.68);
+
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,.05);
+
+box-shadow:
+0 0 50px rgba(0,0,0,.5);
+
 text-align:center;
 
-max-width:900px;
+animation:fadeIn 1s ease;
 }
+
+@keyframes fadeIn{
+
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+/* LOGO */
 
 .logo{
 
-font-size:95px;
+font-size:110px;
 
-margin-bottom:10px;
+margin-bottom:15px;
 
 animation:float 3s ease-in-out infinite;
 }
@@ -93,7 +142,7 @@ transform:translateY(0);
 }
 
 50%{
-transform:translateY(-10px);
+transform:translateY(-12px);
 }
 
 100%{
@@ -102,70 +151,119 @@ transform:translateY(0);
 
 }
 
+/* TITLE */
+
 h1{
 
 font-size:78px;
-font-weight:700;
+
+font-weight:800;
 
 line-height:1.1;
 
-margin-bottom:18px;
+margin-bottom:20px;
 
 color:#facc15;
 
 text-shadow:
-0 0 25px rgba(250,204,21,.4);
+0 0 30px rgba(250,204,21,.45);
 }
 
 p{
 
+max-width:780px;
+
+margin:auto;
+
 font-size:22px;
 
-color:#ddd;
+line-height:1.8;
 
-margin-bottom:45px;
+color:#d6d6d6;
 
-line-height:1.7;
+margin-bottom:55px;
 }
+
+/* MENU */
 
 .menu{
 
 display:flex;
+
 justify-content:center;
+
 flex-wrap:wrap;
-gap:20px;
+
+gap:22px;
+
+margin-bottom:60px;
 }
 
 .btn{
 
 padding:18px 34px;
 
-border-radius:20px;
+border-radius:22px;
 
 text-decoration:none;
 
+font-size:18px;
+
 font-weight:600;
-font-size:17px;
 
 color:white;
 
-transition:.3s;
-
 display:flex;
 align-items:center;
+justify-content:center;
+
 gap:12px;
 
-box-shadow:
-0 0 20px rgba(0,0,0,.35);
+transition:.35s;
+
+position:relative;
+
+overflow:hidden;
+}
+
+.btn::before{
+
+content:'';
+
+position:absolute;
+
+top:0;
+left:-100%;
+
+width:100%;
+height:100%;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.18),
+transparent
+);
+
+transition:.5s;
+}
+
+.btn:hover::before{
+left:100%;
 }
 
 .btn:hover{
 
 transform:
-translateY(-5px)
-scale(1.04);
+translateY(-7px)
+scale(1.03);
 
+box-shadow:
+0 0 25px rgba(255,255,255,.12);
 }
+
+/* BUTTON COLORS */
 
 .services{
 
@@ -175,7 +273,6 @@ linear-gradient(
 #9333ea,
 #6b21a8
 );
-
 }
 
 .testi{
@@ -198,40 +295,104 @@ linear-gradient(
 #ef4444,
 #991b1b
 );
-
 }
+
+/* FEATURES */
+
+.features{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+}
+
+.feature{
+
+padding:28px;
+
+border-radius:24px;
+
+background:
+rgba(255,255,255,.04);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+transition:.3s;
+}
+
+.feature:hover{
+
+transform:translateY(-6px);
+
+background:
+rgba(255,255,255,.06);
+}
+
+.feature h3{
+
+font-size:22px;
+
+margin-bottom:10px;
+
+color:#facc15;
+}
+
+.feature p{
+
+font-size:15px;
+
+line-height:1.7;
+
+margin:0;
+
+color:#ccc;
+}
+
+/* FOOTER */
 
 .footer{
 
-margin-top:60px;
+margin-top:45px;
 
 font-size:14px;
 
-color:#999;
+color:#888;
 }
 
+/* RESPONSIVE */
+
 @media(max-width:768px){
+
+.container{
+padding:35px 25px;
+}
+
+.logo{
+font-size:75px;
+}
 
 h1{
 font-size:48px;
 }
 
 p{
-font-size:18px;
-}
-
-.logo{
-font-size:70px;
-}
-
-.btn{
-width:100%;
-justify-content:center;
+font-size:17px;
 }
 
 .menu{
 flex-direction:column;
+}
+
+.btn{
 width:100%;
+}
+
+.features{
+grid-template-columns:1fr;
 }
 
 }
@@ -242,7 +403,8 @@ width:100%;
 
 <body>
 
-<div class="glow"></div>
+<div class="glow1"></div>
+<div class="glow2"></div>
 
 <div class="container">
 
@@ -256,7 +418,8 @@ Web Dukun Online
 
 <p>
 Temukan ritual mistis terbaik untuk cinta, penglaris,
-buka aura, hingga santet premium paling terpercaya 👁️
+buka aura, hingga pengasihan premium paling terpercaya.
+Semua ritual diproses cepat oleh dukun digital Nusantara 👁️
 </p>
 
 <div class="menu">
@@ -284,6 +447,46 @@ class="btn admin">
 👑 Admin
 
 </a>
+
+</div>
+
+<div class="features">
+
+<div class="feature">
+
+<h3>
+💘 Ritual Cinta
+</h3>
+
+<p>
+Pelet anti ghosting hingga pengasihan mantan paling ampuh.
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>
+💸 Penglaris
+</h3>
+
+<p>
+Bantu usaha makin rame dan orderan membludak setiap hari.
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>
+✨ Buka Aura
+</h3>
+
+<p>
+Naikkan daya tarik dan aura positif agar jadi pusat perhatian.
+</p>
+
+</div>
 
 </div>
 
