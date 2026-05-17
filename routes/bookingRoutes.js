@@ -476,7 +476,7 @@ router.get('/home', async (req,res)=>{
 
 });
 
-module.exports = router;
+
 router.get('/payments', async (req,res)=>{
 
     try{
@@ -562,3 +562,92 @@ async(req,res)=>{
 
 });
 
+router.get('/payments', async (req,res)=>{
+
+    try{
+
+        const payments = await Payment.find();
+
+        res.render('paymentAdmin',{
+            payments
+        });
+
+    }catch(err){
+
+        console.log(err);
+        res.send('Gagal membuka payment');
+
+    }
+
+});
+
+router.get('/testimonials', async (req,res)=>{
+
+    try{
+
+        const testimonials =
+        await Testimonial.find();
+
+        res.render(
+            'testimonial',
+            { testimonials }
+        );
+
+    }catch(err){
+
+        console.log(err);
+
+        res.send('Gagal membuka testimonial');
+
+    }
+
+});
+
+router.get('/admin/add-service',
+(req,res)=>{
+
+    res.render('add');
+
+});
+
+router.post('/admin/add-service',
+async(req,res)=>{
+
+    try{
+
+        const newService =
+        new Service({
+
+            nama_jasa:
+            req.body.nama_jasa,
+
+            durasi_hari:
+            req.body.durasi_hari,
+
+            efek_samping:
+            req.body.efek_samping,
+
+            harga_jasa:
+            req.body.harga_jasa
+
+        });
+
+        await newService.save();
+
+        res.redirect('/services');
+
+    }catch(err){
+
+        console.log(err);
+
+        res.send('Gagal tambah ritual');
+
+    }
+
+});
+
+// =======================
+// EXPORT ROUTER
+// =======================
+
+module.exports = router;
