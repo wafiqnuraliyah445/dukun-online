@@ -4,11 +4,11 @@ const serviceSchema = new mongoose.Schema({
 
     nama_jasa: String,
 
+    harga_jasa: Number,
+
     durasi_hari: Number,
 
-    efek_samping: String,
-
-    harga_jasa: Number
+    efek_samping: String
 
 });
 

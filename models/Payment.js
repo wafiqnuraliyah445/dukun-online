@@ -3,14 +3,7 @@ const mongoose = require('mongoose');
 const paymentSchema =
 new mongoose.Schema({
 
-    booking_id: {
-
-        type:
-        mongoose.Schema.Types.ObjectId,
-
-        ref: 'Booking'
-
-    },
+    booking_id: String,
 
     client_nama: String,
 
@@ -18,15 +11,13 @@ new mongoose.Schema({
 
     metode: String,
 
-    status: {
-
-        type: String,
-
-        default: 'pending'
-
-    },
+    status: String,
 
     tanggal_bayar: String
+
+}, {
+
+    timestamps: true
 
 });
 

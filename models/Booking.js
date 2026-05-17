@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-const bookingSchema =
-new mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
 
     client_nama: String,
 
@@ -13,13 +12,7 @@ new mongoose.Schema({
 
     tanggal: String,
 
-    status: {
-
-        type: String,
-
-        default: 'diproses'
-
-    }
+    status: String
 
 }, {
 
