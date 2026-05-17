@@ -55,96 +55,6 @@ mongoose.connect(process.env.MONGO_URI)
 
 
 // =======================
-// MIDDLEWARE LOGIN ADMIN
-// =======================
-
-function isLogin(
-req,
-res,
-next
-){
-
-    if(
-        req.session.user
-    ){
-
-        next();
-
-    }else{
-
-        res.redirect(
-            '/admin/login'
-        );
-
-    }
-
-}
-
-// =======================
-// LOGIN ADMIN PAGE
-// =======================
-
-app.get('/admin/login',
-(req,res)=>{
-
-    res.render(
-        'adminLogin'
-    );
-
-});
-
-// =======================
-// PROCESS LOGIN ADMIN
-// =======================
-
-app.post('/admin/login',
-(req,res)=>{
-
-    const {
-        username,
-        password
-    } = req.body;
-
-    // LOGIN ADMIN
-    if(
-
-        username === 'admin'
-        &&
-        password === '123'
-
-    ){
-
-        req.session.user =
-        username;
-
-        return res.redirect(
-            '/admin/dashboard'
-        );
-
-    }
-
-    res.send(
-        '❌ Login gagal'
-    );
-
-});
-
-// =======================
-// LOGOUT
-// =======================
-
-app.get('/logout',
-(req,res)=>{
-
-    req.session.destroy();
-
-    res.redirect(
-        '/admin/login'
-    );
-
-});
-
-// =======================
 // USER ROUTES
 // =======================
 
@@ -155,18 +65,6 @@ require('./routes/bookingRoutes');
 app.use('/',
 bookingRoutes);
 
-// =======================
-// ADMIN ROUTES
-// =======================
-
-app.use(
-'/admin',
-
-isLogin,
-
-bookingRoutes
-
-);
 
 // =======================
 // SERVER

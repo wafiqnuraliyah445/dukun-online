@@ -1,8 +1,42 @@
 const express = require('express');
 const router = express.Router();
 
-// MODEL BOOKING
+// =======================
+// IMPORT MODEL
+// =======================
+
 const Booking = require('../models/Booking');
+const Testimonial = require('../models/Testimonial');
+const Service = require('../models/Service');
+const Payment = require('../models/Payment');
+
+// =======================
+// MIDDLEWARE LOGIN ADMIN
+// =======================
+
+function isLogin(req, res, next) {
+
+    if (req.session.user) {
+
+        next();
+
+    } else {
+
+        res.redirect('/admin/login');
+
+    }
+
+}
+
+// =======================
+// ROOT
+// =======================
+
+router.get('/', (req, res) => {
+
+    res.redirect('/home');
+
+});
 
 // =======================
 // HOME
@@ -12,12 +46,19 @@ router.get('/home', async (req, res) => {
 
     try {
 
-        res.render('home');
+        const services = await Service.find();
+
+        res.render('home', {
+            services
+        });
 
     } catch (err) {
 
         console.log(err);
-        res.send(err.message);
+
+        res.status(500).send(
+            'Gagal membuka home'
+        );
 
     }
 
@@ -27,32 +68,561 @@ router.get('/home', async (req, res) => {
 // SERVICES
 // =======================
 
-router.get('/services', (req, res) => {
-    res.render('services');
+router.get('/services', async (req, res) => {
+
+    try {
+
+        const services = await Service.find();
+
+        res.render('services', {
+            services
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal membuka services'
+        );
+
+    }
+
 });
 
 // =======================
 // TESTIMONIAL
 // =======================
 
-router.get('/testimonial', (req, res) => {
-    res.render('testimonial');
+router.get('/testimonial', async (req, res) => {
+
+    try {
+
+        const testimonials =
+        await Testimonial.find()
+        .sort({ createdAt: -1 });
+
+        res.render('testimonial', {
+            testimonials
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal membuka testimonial'
+        );
+
+    }
+
+});
+
+// =======================
+// TAMBAH TESTIMONIAL
+// =======================
+
+router.get('/testimonial/add', (req, res) => {
+
+    res.render('addTestimonial');
+
+});
+
+router.post('/testimonial/add', async (req, res) => {
+
+    try {
+
+        const {
+            client_nama,
+            dukun_nama,
+            review,
+            rating
+        } = req.body;
+
+        const newTestimonial =
+        new Testimonial({
+
+            client_nama,
+            dukun_nama,
+            review,
+            rating
+
+        });
+
+        await newTestimonial.save();
+
+        res.redirect('/testimonial');
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal tambah testimonial'
+        );
+
+    }
+
+});
+
+// =======================
+// FORM BOOKING
+// =======================
+
+router.get('/add', async (req, res) => {
+
+    try {
+
+        const services =
+        await Service.find();
+
+        const selectedService =
+        req.query.service || '';
+
+        res.render('add', {
+
+            services,
+            selectedService
+
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal membuka form booking'
+        );
+
+    }
+
+});
+
+// =======================
+// SIMPAN BOOKING
+// =======================
+
+router.post('/add', async (req, res) => {
+
+    try {
+
+        const {
+
+            client_nama,
+            dukun_nama,
+            jasa,
+            tanggal,
+            status
+
+        } = req.body;
+
+        const selectedService =
+        await Service.findOne({
+            nama_jasa: jasa
+        });
+
+        if (!selectedService) {
+
+            return res.send(
+                'Service tidak ditemukan'
+            );
+
+        }
+
+        const newBooking =
+        new Booking({
+
+            client_nama,
+            dukun_nama,
+            jasa,
+
+            harga:
+            selectedService.harga_jasa,
+
+            tanggal,
+
+            status:
+            status || 'diproses'
+
+        });
+
+        await newBooking.save();
+
+        res.redirect(
+            `/payment/${newBooking._id}`
+        );
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal tambah booking'
+        );
+
+    }
+
 });
 
 // =======================
 // PAYMENT
 // =======================
 
-router.get('/payment', (req, res) => {
-    res.render('payment');
+router.get('/payment/:id', async (req, res) => {
+
+    try {
+
+        const booking =
+        await Booking.findById(
+            req.params.id
+        );
+
+        if (!booking) {
+
+            return res.send(
+                'Booking tidak ditemukan'
+            );
+
+        }
+
+        res.render('payment', {
+
+            booking,
+
+            jumlah:
+            booking.harga
+
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal membuka payment'
+        );
+
+    }
+
 });
 
 // =======================
-// DASHBOARD
+// SIMPAN PAYMENT
 // =======================
 
-router.get('/dashboard', (req, res) => {
-    res.send('Dashboard Admin');
+router.post('/payment', async (req, res) => {
+
+    try {
+
+        const {
+
+            booking_id,
+            metode
+
+        } = req.body;
+
+        const booking =
+        await Booking.findById(
+            booking_id
+        );
+
+        if (!booking) {
+
+            return res.send(
+                'Booking tidak ditemukan'
+            );
+
+        }
+
+        const newPayment =
+        new Payment({
+
+            booking_id:
+            booking._id,
+
+            client_nama:
+            booking.client_nama,
+
+            jumlah:
+            booking.harga,
+
+            metode,
+
+            status: 'pending',
+
+            tanggal_bayar:
+            new Date()
+            .toISOString()
+            .split('T')[0]
+
+        });
+
+        await newPayment.save();
+
+        res.redirect('/home');
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal payment'
+        );
+
+    }
+
+});
+
+// =======================
+// LOGIN ADMIN
+// =======================
+
+router.get('/admin/login', (req, res) => {
+
+    res.render('adminLogin');
+
+});
+
+router.post('/admin/login', (req, res) => {
+
+    const {
+        username,
+        password
+    } = req.body;
+
+    if (
+
+        username === 'admin'
+        &&
+        password === '123'
+
+    ) {
+
+        req.session.user = username;
+
+        return res.redirect(
+            '/admin/dashboard'
+        );
+
+    }
+
+    res.send('Login gagal');
+
+});
+
+// =======================
+// LOGOUT
+// =======================
+
+router.get('/logout', (req, res) => {
+
+    req.session.destroy();
+
+    res.redirect('/admin/login');
+
+});
+
+// =======================
+// DASHBOARD ADMIN
+// =======================
+
+router.get(
+'/admin/dashboard',
+
+isLogin,
+
+async (req, res) => {
+
+    try {
+
+        const bookings =
+        await Booking.find()
+        .sort({ createdAt: -1 });
+
+        res.render('index', {
+            bookings
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal membuka dashboard'
+        );
+
+    }
+
+});
+
+// =======================
+// EDIT BOOKING
+// =======================
+
+router.get(
+'/edit/:id',
+
+isLogin,
+
+async (req, res) => {
+
+    try {
+
+        const booking =
+        await Booking.findById(
+            req.params.id
+        );
+
+        const services =
+        await Service.find();
+
+        res.render('edit', {
+
+            booking,
+            services
+
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal membuka edit'
+        );
+
+    }
+
+});
+
+// =======================
+// UPDATE BOOKING
+// =======================
+
+router.post(
+'/edit/:id',
+
+isLogin,
+
+async (req, res) => {
+
+    try {
+
+        const {
+
+            client_nama,
+            dukun_nama,
+            jasa,
+            tanggal,
+            status
+
+        } = req.body;
+
+        const selectedService =
+        await Service.findOne({
+            nama_jasa: jasa
+        });
+
+        await Booking.findByIdAndUpdate(
+
+            req.params.id,
+
+            {
+
+                client_nama,
+                dukun_nama,
+                jasa,
+
+                harga:
+                selectedService.harga_jasa,
+
+                tanggal,
+                status
+
+            }
+
+        );
+
+        res.redirect(
+            '/admin/dashboard'
+        );
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal update booking'
+        );
+
+    }
+
+});
+
+// =======================
+// DELETE BOOKING
+// =======================
+
+router.get(
+'/delete/:id',
+
+isLogin,
+
+async (req, res) => {
+
+    try {
+
+        await Booking.findByIdAndDelete(
+            req.params.id
+        );
+
+        res.redirect(
+            '/admin/dashboard'
+        );
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal hapus booking'
+        );
+
+    }
+
+});
+
+// =======================
+// PAYMENT ADMIN
+// =======================
+
+router.get(
+'/admin/payment',
+
+isLogin,
+
+async (req, res) => {
+
+    try {
+
+        const payments =
+        await Payment.find()
+        .sort({ createdAt: -1 });
+
+        res.render('paymentAdmin', {
+            payments
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).send(
+            'Gagal membuka payment admin'
+        );
+
+    }
+
 });
 
 // =======================
