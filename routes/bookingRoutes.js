@@ -509,9 +509,9 @@ async (req, res) => {
 
 });
 
-router.get('/home', async (req,res)=>{
+    router.get('/admin/dashboard', async (req,res)=>{
 
-    try {
+    try{
 
         const bookings = await Booking.find();
 
@@ -519,10 +519,11 @@ router.get('/home', async (req,res)=>{
             bookings
         });
 
-    } catch(err){
+    }catch(err){
 
         console.log(err);
-        res.send('Gagal membuka home');
+
+        res.send('Gagal membuka dashboard');
 
     }
 
@@ -763,6 +764,42 @@ router.post('/payment', async (req,res)=>{
 router.get('/payment-success',(req,res)=>{
 
     res.render('payment-success');
+
+});
+
+// =======================
+// HOME USER
+// =======================
+
+router.get('/home', (req,res)=>{
+
+    res.render('home');
+
+});
+
+// =======================
+// PAYMENT ADMIN
+// =======================
+
+router.get('/payment-admin', async (req, res) => {
+
+    try {
+
+        const payments =
+        await Payment.find();
+
+        res.render(
+            'paymentAdmin',
+            { payments }
+        );
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.send('Gagal membuka payment');
+
+    }
 
 });
 
