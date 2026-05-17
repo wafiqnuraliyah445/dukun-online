@@ -719,6 +719,49 @@ router.get('/payment-admin', async (req, res) => {
 });
 
 // =======================
+// PROSES PAYMENT
+// =======================
+
+router.post('/payment', async (req,res)=>{
+
+    try{
+
+        const {
+
+            booking_id,
+            jumlah,
+            metode
+
+        } = req.body;
+
+        await Payment.findOneAndUpdate(
+
+            { booking_id: booking_id },
+
+            {
+
+                metode: metode,
+                status: 'lunas'
+
+            },
+
+            { new:true }
+
+        );
+
+        res.redirect('/home');
+
+    }catch(err){
+
+        console.log(err);
+
+        res.send('Gagal payment');
+
+    }
+
+});
+
+// =======================
 // EXPORT ROUTER
 // =======================
 
