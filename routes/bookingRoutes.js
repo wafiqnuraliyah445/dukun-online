@@ -42,11 +42,15 @@ router.get('/', (req, res) => {
 // HOME
 // =======================
 
-router.get('/home', (req, res) => {
+router.get('/home', async (req, res) => {
 
     try {
 
-        res.render('home');
+        const bookings = await Booking.find();
+
+        res.render('admin/dashboard', {
+            bookings
+        });
 
     } catch (err) {
 
