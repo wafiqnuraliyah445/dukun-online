@@ -7,7 +7,6 @@ const router = express.Router();
 
 const Booking = require('../models/Booking');
 const Testimonial = require('../models/Testimonial');
-const Service = require('../models/Service');
 const Payment = require('../models/Payment');
 
 // =======================
@@ -42,23 +41,17 @@ router.get('/', (req, res) => {
 // HOME
 // =======================
 
-router.get('/home', async (req, res) => {
+router.get('/home', (req, res) => {
 
     try {
 
-        const services = await Service.find();
-
-        res.render('home', {
-            services
-        });
+        res.render('home');
 
     } catch (err) {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal membuka home'
-        );
+        res.send('Gagal membuka home');
 
     }
 
@@ -68,23 +61,17 @@ router.get('/home', async (req, res) => {
 // SERVICES
 // =======================
 
-router.get('/services', async (req, res) => {
+router.get('/services', (req, res) => {
 
     try {
 
-        const services = await Service.find();
-
-        res.render('services', {
-            services
-        });
+        res.render('services');
 
     } catch (err) {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal membuka services'
-        );
+        res.send('Gagal membuka services');
 
     }
 
@@ -110,9 +97,7 @@ router.get('/testimonial', async (req, res) => {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal membuka testimonial'
-        );
+        res.send('Gagal membuka testimonial');
 
     }
 
@@ -157,9 +142,7 @@ router.post('/testimonial/add', async (req, res) => {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal tambah testimonial'
-        );
+        res.send('Gagal tambah testimonial');
 
     }
 
@@ -169,30 +152,17 @@ router.post('/testimonial/add', async (req, res) => {
 // FORM BOOKING
 // =======================
 
-router.get('/add', async (req, res) => {
+router.get('/add', (req, res) => {
 
     try {
 
-        const services =
-        await Service.find();
-
-        const selectedService =
-        req.query.service || '';
-
-        res.render('add', {
-
-            services,
-            selectedService
-
-        });
+        res.render('add');
 
     } catch (err) {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal membuka form booking'
-        );
+        res.send('Gagal membuka form booking');
 
     }
 
@@ -216,29 +186,12 @@ router.post('/add', async (req, res) => {
 
         } = req.body;
 
-        const selectedService =
-        await Service.findOne({
-            nama_jasa: jasa
-        });
-
-        if (!selectedService) {
-
-            return res.send(
-                'Service tidak ditemukan'
-            );
-
-        }
-
         const newBooking =
         new Booking({
 
             client_nama,
             dukun_nama,
             jasa,
-
-            harga:
-            selectedService.harga_jasa,
-
             tanggal,
 
             status:
@@ -248,17 +201,13 @@ router.post('/add', async (req, res) => {
 
         await newBooking.save();
 
-        res.redirect(
-            `/payment/${newBooking._id}`
-        );
+        res.redirect('/home');
 
     } catch (err) {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal tambah booking'
-        );
+        res.send('Gagal tambah booking');
 
     }
 
@@ -268,106 +217,17 @@ router.post('/add', async (req, res) => {
 // PAYMENT
 // =======================
 
-router.get('/payment/:id', async (req, res) => {
+router.get('/payment', (req, res) => {
 
     try {
 
-        const booking =
-        await Booking.findById(
-            req.params.id
-        );
-
-        if (!booking) {
-
-            return res.send(
-                'Booking tidak ditemukan'
-            );
-
-        }
-
-        res.render('payment', {
-
-            booking,
-
-            jumlah:
-            booking.harga
-
-        });
+        res.render('payment');
 
     } catch (err) {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal membuka payment'
-        );
-
-    }
-
-});
-
-// =======================
-// SIMPAN PAYMENT
-// =======================
-
-router.post('/payment', async (req, res) => {
-
-    try {
-
-        const {
-
-            booking_id,
-            metode
-
-        } = req.body;
-
-        const booking =
-        await Booking.findById(
-            booking_id
-        );
-
-        if (!booking) {
-
-            return res.send(
-                'Booking tidak ditemukan'
-            );
-
-        }
-
-        const newPayment =
-        new Payment({
-
-            booking_id:
-            booking._id,
-
-            client_nama:
-            booking.client_nama,
-
-            jumlah:
-            booking.harga,
-
-            metode,
-
-            status: 'pending',
-
-            tanggal_bayar:
-            new Date()
-            .toISOString()
-            .split('T')[0]
-
-        });
-
-        await newPayment.save();
-
-        res.redirect('/home');
-
-    } catch (err) {
-
-        console.log(err);
-
-        res.status(500).send(
-            'Gagal payment'
-        );
+        res.send('Gagal membuka payment');
 
     }
 
@@ -447,9 +307,7 @@ async (req, res) => {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal membuka dashboard'
-        );
+        res.send('Gagal membuka dashboard');
 
     }
 
@@ -473,23 +331,15 @@ async (req, res) => {
             req.params.id
         );
 
-        const services =
-        await Service.find();
-
         res.render('edit', {
-
-            booking,
-            services
-
+            booking
         });
 
     } catch (err) {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal membuka edit'
-        );
+        res.send('Gagal membuka edit');
 
     }
 
@@ -518,11 +368,6 @@ async (req, res) => {
 
         } = req.body;
 
-        const selectedService =
-        await Service.findOne({
-            nama_jasa: jasa
-        });
-
         await Booking.findByIdAndUpdate(
 
             req.params.id,
@@ -532,10 +377,6 @@ async (req, res) => {
                 client_nama,
                 dukun_nama,
                 jasa,
-
-                harga:
-                selectedService.harga_jasa,
-
                 tanggal,
                 status
 
@@ -551,9 +392,7 @@ async (req, res) => {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal update booking'
-        );
+        res.send('Gagal update booking');
 
     }
 
@@ -584,9 +423,7 @@ async (req, res) => {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal hapus booking'
-        );
+        res.send('Gagal hapus booking');
 
     }
 
@@ -617,9 +454,7 @@ async (req, res) => {
 
         console.log(err);
 
-        res.status(500).send(
-            'Gagal membuka payment admin'
-        );
+        res.send('Gagal membuka payment admin');
 
     }
 
