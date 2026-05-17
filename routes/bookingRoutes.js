@@ -470,3 +470,15 @@ async (req, res) => {
 // =======================
 
 module.exports = router;
+
+router.get('/admin/dashboard', async (req,res)=>{
+
+    const bookings =
+    await Booking.find();
+
+    res.render(
+        'admin/dashboard',
+        { bookings }
+    );
+
+});
