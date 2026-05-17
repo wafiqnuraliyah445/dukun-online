@@ -210,8 +210,7 @@ router.post('/add', async (req,res)=>{
             tanggal:
             req.body.tanggal,
 
-            status:
-            req.body.status,
+            status:'diproses'
 
             harga:
             harga
