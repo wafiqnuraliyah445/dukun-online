@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Layanan Dukun</title>
+<title>Layanan Dukun Online</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -22,12 +22,12 @@ body{
 
 min-height:100vh;
 
-padding:50px;
+padding:40px;
 
 background:
 linear-gradient(
-rgba(0,0,0,.85),
-rgba(0,0,0,.88)
+rgba(0,0,0,.88),
+rgba(0,0,0,.92)
 ),
 
 url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');
@@ -35,76 +35,219 @@ url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200');
 background-size:cover;
 background-position:center;
 
+overflow-x:hidden;
+
 color:white;
+}
+
+.glow{
+
+position:fixed;
+
+width:500px;
+height:500px;
+
+background:
+radial-gradient(
+circle,
+rgba(168,85,247,.18),
+transparent 70%
+);
+
+top:-120px;
+right:-120px;
+
+filter:blur(50px);
+
+z-index:0;
+}
+
+.header{
+
+position:relative;
+z-index:2;
+
+text-align:center;
+
+margin-bottom:55px;
+}
+
+.badge{
+
+display:inline-block;
+
+padding:10px 22px;
+
+border-radius:30px;
+
+background:
+rgba(168,85,247,.12);
+
+border:
+1px solid rgba(168,85,247,.3);
+
+color:#d8b4fe;
+
+font-size:14px;
+
+margin-bottom:20px;
+
+backdrop-filter:blur(10px);
+}
+
+.logo{
+
+font-size:85px;
+
+margin-bottom:10px;
+
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
+100%{
+transform:translateY(0);
+}
+
 }
 
 h1{
 
-text-align:center;
+font-size:72px;
 
-font-size:65px;
+font-weight:700;
 
-color:#facc15;
+line-height:1.1;
 
-margin-bottom:10px;
+background:
+linear-gradient(
+90deg,
+#facc15,
+#fde68a,
+#facc15
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+margin-bottom:18px;
 
 text-shadow:
-0 0 20px rgba(250,204,21,.5);
+0 0 25px rgba(250,204,21,.18);
 }
 
 .sub{
 
-text-align:center;
+font-size:22px;
 
 color:#ddd;
 
-font-size:22px;
-
-margin-bottom:50px;
+line-height:1.6;
 }
 
 .container{
 
+position:relative;
+z-index:2;
+
 display:grid;
 
 grid-template-columns:
-repeat(auto-fit,minmax(320px,1fr));
+repeat(auto-fit,minmax(300px,1fr));
 
-gap:30px;
+gap:28px;
 }
 
 .card{
 
+position:relative;
+
 background:
-rgba(20,20,20,.75);
+rgba(15,15,15,.82);
 
-border-radius:25px;
+border-radius:28px;
 
-padding:30px;
+padding:28px;
 
-backdrop-filter:blur(10px);
+overflow:hidden;
 
 border:
-1px solid rgba(255,255,255,.06);
+1px solid rgba(255,255,255,.08);
 
-transition:.3s;
+backdrop-filter:blur(14px);
+
+transition:.35s;
+}
+
+.card::before{
+
+content:'';
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:4px;
+
+background:
+linear-gradient(
+90deg,
+#facc15,
+#9333ea
+);
+
 }
 
 .card:hover{
 
 transform:
-translateY(-8px)
+translateY(-10px)
 scale(1.02);
 
 box-shadow:
-0 0 25px rgba(250,204,21,.18);
+0 0 35px rgba(168,85,247,.22);
+}
+
+.icon{
+
+width:78px;
+height:78px;
+
+border-radius:50%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-size:34px;
+
+margin-bottom:20px;
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
 }
 
 .title{
 
-font-size:38px;
+font-size:34px;
 
 font-weight:700;
+
+line-height:1.2;
 
 margin-bottom:20px;
 
@@ -113,37 +256,65 @@ color:#facc15;
 
 .info{
 
-font-size:18px;
+display:flex;
+justify-content:space-between;
 
-line-height:1.8;
+margin-bottom:16px;
+
+font-size:17px;
 
 color:#e5e5e5;
 }
 
+.label{
+
+opacity:.75;
+}
+
+.value{
+
+font-weight:600;
+
+text-align:right;
+
+max-width:150px;
+}
+
 .price{
 
-margin-top:20px;
+margin-top:22px;
 
-font-size:38px;
+font-size:40px;
 
-font-weight:bold;
+font-weight:700;
 
 color:#22c55e;
 }
 
-.back{
+.btn{
 
-display:inline-block;
+display:inline-flex;
 
-margin-top:50px;
+align-items:center;
+justify-content:center;
 
-padding:16px 28px;
+gap:10px;
+
+margin-top:25px;
+
+width:100%;
+
+padding:15px;
 
 border-radius:18px;
 
 text-decoration:none;
 
 font-weight:600;
+
+font-size:16px;
+
+color:white;
 
 background:
 linear-gradient(
@@ -152,7 +323,47 @@ linear-gradient(
 #6b21a8
 );
 
+transition:.3s;
+}
+
+.btn:hover{
+
+transform:scale(1.03);
+
+box-shadow:
+0 0 20px rgba(147,51,234,.35);
+}
+
+.back-wrap{
+
+position:relative;
+z-index:2;
+
+text-align:center;
+
+margin-top:50px;
+}
+
+.back{
+
+display:inline-block;
+
+padding:16px 32px;
+
+border-radius:18px;
+
+text-decoration:none;
+
+font-weight:600;
+
 color:white;
+
+background:
+linear-gradient(
+135deg,
+#7c3aed,
+#4c1d95
+);
 
 transition:.3s;
 }
@@ -162,17 +373,60 @@ transition:.3s;
 transform:scale(1.05);
 }
 
+@media(max-width:768px){
+
+body{
+padding:25px;
+}
+
+h1{
+font-size:46px;
+}
+
+.sub{
+font-size:18px;
+}
+
+.logo{
+font-size:65px;
+}
+
+.title{
+font-size:28px;
+}
+
+.price{
+font-size:34px;
+}
+
+}
+
 </style>
 
 </head>
+
 <body>
 
+<div class="glow"></div>
+
+<div class="header">
+
+<div class="badge">
+✨ LAYANAN TERPERCAYA
+</div>
+
+<div class="logo">
+🔮
+</div>
+
 <h1>
-🔮 Layanan Dukun Online
+Layanan Dukun Online
 </h1>
 
 <div class="sub">
 Pilih ritual terbaik sesuai kebutuhan hidupmu
+</div>
+
 </div>
 
 <div class="container">
@@ -181,19 +435,61 @@ Pilih ritual terbaik sesuai kebutuhan hidupmu
 
 <div class="card">
 
+<div class="icon">
+
+<%
+let icon = '✨';
+
+if(service.nama_jasa.includes('Ghosting')){
+icon = '💘';
+}
+
+else if(service.nama_jasa.includes('Penglaris')){
+icon = '💰';
+}
+
+else if(service.nama_jasa.includes('Santet')){
+icon = '💀';
+}
+
+else if(service.nama_jasa.includes('Aura')){
+icon = '🌟';
+}
+
+else if(service.nama_jasa.includes('Pengasihan')){
+icon = '💕';
+}
+%>
+
+<%= icon %>
+
+</div>
+
 <div class="title">
 <%= service.nama_jasa %>
 </div>
 
 <div class="info">
 
-⏳ Durasi:
-<%= service.durasi_hari %> Hari
+<div class="label">
+⏳ Durasi
+</div>
 
-<br><br>
+<div class="value">
+<%= service.durasi_hari || '-' %> Hari
+</div>
 
-⚠️ Efek Samping:
-<%= service.efek_samping %>
+</div>
+
+<div class="info">
+
+<div class="label">
+⚠️ Efek Samping
+</div>
+
+<div class="value">
+<%= service.efek_samping || 'Belum tersedia' %>
+</div>
 
 </div>
 
@@ -203,19 +499,31 @@ Rp <%= Number(service.harga_jasa).toLocaleString('id-ID') %>
 
 </div>
 
+<a
+href="/add"
+class="btn">
+
+🔮 Pilih Ritual
+
+</a>
+
 </div>
 
 <% }) %>
 
 </div>
 
+<div class="back-wrap">
+
 <a
 href="/home"
 class="back">
 
-← Kembali Home
+← Kembali ke Home
 
 </a>
+
+</div>
 
 </body>
 </html>
